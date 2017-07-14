@@ -83,11 +83,9 @@ module coil_retainer_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, dshape
         }
         
         // Wire hole
-        for (i = [-1,0,1]) {
-            rotate([0, 0, 360 / slots / 6 * i - 360 / slots / 2]) {
-                translate([0, outer_d / 2 - wire_d * 6]) {
-                    #circle(d=wire_d);
-                }
+        rotate([0, 0, 360 / slots / 2]) {
+            translate([0, shaft_d / 2 + (outer_d - shaft_d) / 4, 0]) {
+                #circle(d=wire_d);
             }
         }
         
@@ -122,11 +120,11 @@ co = 0;   // Number of wind load reduction cutouts
 wire_length = od * PI * ct;
 echo(wire_length=wire_length,"mm");
 
-for (i = [0:5]) {
-    translate([0, i * 17, 0])
-    coil_comb_2d(od, id, sd, st, wd, ns, i, ct, tl, co);
-}
-coil_comb_3d(od, id, sd, st, wd, ns, 0, ct, tl, co, st);
+//for (i = [0:5]) {
+//    translate([0, i * 17, 0])
+//    coil_comb_2d(od, id, sd, st, wd, ns, i, ct, tl, co);
+//}
+//coil_comb_3d(od, id, sd, st, wd, ns, 0, ct, tl, co, st);
 
-//coil_retainer_2d(od, id, sd, st, wd, ns, ds);
+coil_retainer_2d(od, id, sd, st, wd, ns, ds);
 //coil_retainer_3d(od, id, sd, st, wd, ns, ds, st);
