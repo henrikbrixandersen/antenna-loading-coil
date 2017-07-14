@@ -120,8 +120,8 @@ wire_length = od * PI * ct;
 echo(wire_length=wire_length,"mm");
 
 for (i = [0:5]) {
-    translate([0, i * 17, 0]) {
-        my_sd = (i == 0) ? (sd - ds) : sd;
+    my_sd = (i == 0) ? (sd - ds) : sd;
+    translate([0, i * (od / 2 - my_sd / 2 + 3 * wd), 0]) {
         coil_comb_2d(od, id, my_sd, st, wd, ns, i, ct, tl, co);
     }
 }
