@@ -11,7 +11,7 @@ module coil_comb_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, slot, turn
     wire_r = wire_d / 2;
     height = (outer_d - inner_d) / 2;
     coil_length = length - slot_w * 2;
-    turn_spacing = (coil_length - (turns * wire_d)) / (turns - 1);
+    turn_spacing = (coil_length - (turns * wire_d)) / turns;
 
     difference() {
         // Main outline
@@ -32,7 +32,7 @@ module coil_comb_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, slot, turn
         }
 
         // Wire cutouts
-        for (i = [0:turns - 2]) {
+        for (i = [0:turns - 1]) {
             offset = turn_spacing / slots * slot;
             translate([coil_length / -2 + wire_d / 2 + i * (turn_spacing + wire_d) + offset, height, 0]) {
                 #circle(wire_d / 2);
@@ -120,11 +120,11 @@ co = 0;   // Number of wind load reduction cutouts
 wire_length = od * PI * ct;
 echo(wire_length=wire_length,"mm");
 
-//for (i = [0:5]) {
-//    translate([0, i * 17, 0])
-//    coil_comb_2d(od, id, sd, st, wd, ns, i, ct, tl, co);
-//}
+for (i = [0:5]) {
+    translate([0, i * 17, 0])
+    coil_comb_2d(od, id, sd, st, wd, ns, i, ct, tl, co);
+}
 //coil_comb_3d(od, id, sd, st, wd, ns, 0, ct, tl, co, st);
 
-coil_retainer_2d(od, id, sd, st, wd, ns, ds);
+//coil_retainer_2d(od, id, sd, st, wd, ns, ds);
 //coil_retainer_3d(od, id, sd, st, wd, ns, ds, st);
