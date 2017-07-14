@@ -22,7 +22,7 @@ module coil_comb_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, slot, turn
                 }
             }
             translate([0, -1 * (inner_d - shaft_d) / 2 + 0.5, 0]) {
-                #square(size = [length + slot_w * 6, 1], center = true);
+                square(size = [length + slot_w * 6, 1], center = true);
             }
         }
 
@@ -121,8 +121,10 @@ wire_length = od * PI * ct;
 echo(wire_length=wire_length,"mm");
 
 for (i = [0:5]) {
-    translate([0, i * 17, 0])
-    coil_comb_2d(od, id, sd, st, wd, ns, i, ct, tl, co);
+    translate([0, i * 17, 0]) {
+        my_sd = (i == 0) ? (sd - ds) : sd;
+        coil_comb_2d(od, id, my_sd, st, wd, ns, i, ct, tl, co);
+    }
 }
 //coil_comb_3d(od, id, sd, st, wd, ns, 0, ct, tl, co, st);
 
