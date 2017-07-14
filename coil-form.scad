@@ -8,7 +8,6 @@
 $fn = 100;
  
 module coil_comb_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, slot, turns, length, cutouts) {
-    wire_r = wire_d / 2;
     height = (outer_d - inner_d) / 2;
     coil_length = length - slot_w * 2;
     turn_spacing = (coil_length - (turns * wire_d)) / turns;
@@ -35,7 +34,7 @@ module coil_comb_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, slot, turn
         for (i = [0:turns - 1]) {
             offset = turn_spacing / slots * slot;
             translate([coil_length / -2 + wire_d / 2 + i * (turn_spacing + wire_d) + offset, height, 0]) {
-                #circle(wire_d / 2);
+                #circle(d = wire_d);
             }
             translate([coil_length / -2 + i * (turn_spacing + wire_d) + offset, height, 0]) {
                 #square(size = [wire_d, wire_d * 3], center = false);
@@ -85,7 +84,7 @@ module coil_retainer_2d(outer_d, inner_d, shaft_d, slot_w, wire_d, slots, dshape
         // Wire hole
         rotate([0, 0, 360 / slots / 2]) {
             translate([0, shaft_d / 2 + (outer_d - shaft_d) / 4, 0]) {
-                #circle(d=wire_d);
+                #circle(d = wire_d);
             }
         }
         
